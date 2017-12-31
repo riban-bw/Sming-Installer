@@ -11,6 +11,7 @@
 WGET_VER=`wget --version|grep "GNU Wget"|awk '{ print $3 }'`
 WGET_MAJ=`echo $WGET_VER|awk -F. '{ print $1 }'`
 WGET_MIN=`echo $WGET_VER|awk -F. '{ print $2 }'`
+echo "wget version: $WGET_MAJ.$WGET_MIN"
 if [ "WGET_MAJ" = "" ]
 then
   echo wget not found. Please install wget.
