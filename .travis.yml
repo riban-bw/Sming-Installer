@@ -1,5 +1,5 @@
 sudo: false
-language: c
+language: bash
 
 os:
 - linux
@@ -20,5 +20,6 @@ script:
 - set -e
 - . ./install.sh
 - cd $SMING_HOME/../samples/Basic_Blink
-- make
-
+- make V=1
+- cd $SMING_HOME/../samples/Basic_Ssl
+- make V=1
