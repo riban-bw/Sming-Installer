@@ -8,10 +8,10 @@
 # 
 
 # Check wget supports --show-progress
-wget -q --show-progress asdf > /dev/null &>/dev/null
+wget -q --show-progress asdf &>/dev/null
 if [ $? -eq 2 ]
 then
-  WGET="wget -q"
+  WGET="wget "
 else
   WGET="wget -q --show-progress"
 fi
@@ -41,13 +41,13 @@ PLATFORM=`uname -sm`
 echo "Downloading Sming packages for $PLATFORM..."
 if [ "$PLATFORM" = "Linux arm6l" ]
 then
-  $WGET https://www.dropbox.com/s/ofhbz9xpu01xtnp/xtensa-lx106-elf-armv6l.zip -O $TEMP/xtensa-lx106-elf.zip
+  $WGET -P $TEMP -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/ofhbz9xpu01xtnp/xtensa-lx106-elf-armv6l.zip
 elif [[ "$PLATFORM" == "Linux"* ]]
 then
-  $WGET -P $TEMP https://www.dropbox.com/s/rjcvejm4wu1er8a/xtensa-lx-elf-linux32.zip -O $TEMP/xtensa-lx106-elf.zip
+  $WGET -P $TEMP  -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/rjcvejm4wu1er8a/xtensa-lx-elf-linux32.zip
 elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
 then
-  $WGET -P $TEMP https://www.dropbox.com/s/9jecy6j0rai1ou1/xtensa-lx106-elf-cygwin32.zip -O $TEMP/xtensa-lx106-elf.zip
+  $WGET -P $TEMP -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/9jecy6j0rai1ou1/xtensa-lx106-elf-cygwin32.zip
 else
   echo "Unsupported platform $PLATFORM"
   exit 1
