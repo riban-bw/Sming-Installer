@@ -7,6 +7,10 @@
 # install.sh
 # 
 
+# Get a valid temp directory
+TEMP=.sming_tmp
+mkdir -p $TEMP
+
 # Check wget supports --show-progress
 wget -q --show-progress asdf &>/dev/null
 if [ $? -eq 2 ]
@@ -67,6 +71,7 @@ unzip -qd Sming/esp-toolkit $TEMP/esptool.zip
 unzip -qd Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip
 
 # TODO: Remove downloaded packages
+rm -r $TEMP
 
 # Set environmental variables
 export ESP_HOME=`pwd`/Sming/esp-toolkit
