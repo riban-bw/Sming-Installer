@@ -1,9 +1,8 @@
 language: bash
+sudo: false
 
 os:
 - linux
-  sudo: false
-  dist: trusty
 - osx
 
 before_install:
