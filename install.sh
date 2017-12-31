@@ -20,6 +20,8 @@ else
   WGET="wget -q --show-progress"
 fi
 
+UNZIP="unzip"
+
 # Check if Sming folder exists
 # TODO: Avoid deleting whole Sming folder in case user keeps other data there
 if [ -d Sming ]
@@ -68,10 +70,10 @@ $WGET -O $TEMP/esptool.zip https://www.dropbox.com/s/21ceaa8u9254k1f/esptool.zip
 
 # Install the packages
 echo "Installing Sming to `pwd`/Sming..."
-unzip -q $TEMP/Sming.zip
-unzip -qd Sming/esp-toolkit $TEMP/SDK.zip
-unzip -qd Sming/esp-toolkit $TEMP/esptool.zip
-unzip -qd Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip
+$UNZIP $TEMP/Sming.zip && echo "Sming installed"
+$UNZIP -d Sming/esp-toolkit $TEMP/SDK.zip && echo "SDK installed"
+$UNZIP -d Sming/esp-toolkit $TEMP/esptool.zip && echo "esptool installed"
+$UNZIP -d Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip && echo "xtensa-lx106-elf compiler installed"
 
 # TODO: Remove downloaded packages
 rm -r $TEMP
