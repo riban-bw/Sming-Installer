@@ -1,0 +1,19 @@
+sudo: false
+os:
+- linux
+env: 
+  matrix:
+  - VERSION=3.5
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - bsdtar
+    - doxygen
+install:
+- ./install.sh
+script:
+- cd $SMING_HOME/../samples/Basic_Blink
+- make
+
