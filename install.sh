@@ -41,28 +41,28 @@ PLATFORM=`uname -sm`
 echo "Downloading Sming packages for $PLATFORM..."
 if [ "$PLATFORM" = "Linux arm6l" ]
 then
-  $WGET -P $TEMP -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/ofhbz9xpu01xtnp/xtensa-lx106-elf-armv6l.zip
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/ofhbz9xpu01xtnp/xtensa-lx106-elf-armv6l.zip
 elif [[ "$PLATFORM" == "Linux"* ]]
 then
-  $WGET -P $TEMP  -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/rjcvejm4wu1er8a/xtensa-lx-elf-linux32.zip
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/rjcvejm4wu1er8a/xtensa-lx-elf-linux32.zip
 elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
 then
-  $WGET -P $TEMP -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/9jecy6j0rai1ou1/xtensa-lx106-elf-cygwin32.zip
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/9jecy6j0rai1ou1/xtensa-lx106-elf-cygwin32.zip
 else
   echo "Unsupported platform $PLATFORM"
   exit 1
 fi
 
 # Download the platform agnostic packages
-$WGET -P $TEMP https://www.dropbox.com/s/k8zwqo114bj213d/Sming-3.5.1.zip
-$WGET -P $TEMP https://www.dropbox.com/s/b8yjilq9a6xagdm/ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
-#$WGET -P $TEMP https://www.dropbox.com/s/3h9f3x236qb8ds5/ESP8266_NONOS_SDK-2.1.0.zip
-$WGET -P $TEMP https://www.dropbox.com/s/21ceaa8u9254k1f/esptool.zip
+$WGET -O $TEMP/Sming.zip https://www.dropbox.com/s/k8zwqo114bj213d/Sming-3.5.1.zip
+$WGET -O $TEMP/SDK.zip https://www.dropbox.com/s/b8yjilq9a6xagdm/ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
+#$WGET -O $TEMP/SDK.zip https://www.dropbox.com/s/3h9f3x236qb8ds5/ESP8266_NONOS_SDK-2.1.0.zip
+$WGET -O $TEMP/esptool.zip https://www.dropbox.com/s/21ceaa8u9254k1f/esptool.zip
 
 # Install the packages
 echo "Installing Sming to `pwd`/Sming..."
-unzip -q $TEMP/Sming-3.5.1.zip
-unzip -qd Sming/esp-toolkit $TEMP/ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
+unzip -q $TEMP/Sming.zip
+unzip -qd Sming/esp-toolkit $TEMP/SDK.zip
 unzip -qd Sming/esp-toolkit $TEMP/esptool.zip
 unzip -qd Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip
 
