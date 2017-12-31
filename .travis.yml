@@ -3,7 +3,7 @@ os:
 - linux
 env: 
   matrix:
-  - VERSION=3.5
+  - VERSION=3.5.1
 addons:
   apt:
     sources:
@@ -12,8 +12,8 @@ addons:
     - bsdtar
     - doxygen
 install:
-- ./install.sh
 script:
+- ./install.sh
 - cd $SMING_HOME/../samples/Basic_Blink
 - make
 
