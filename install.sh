@@ -36,7 +36,7 @@ then
 elif [ "$PLATFORM" = "Linux i686" ]
 then
   wget -q --show-progress -P $TEMP https://www.dropbox.com/s/rjcvejm4wu1er8a/xtensa-lx-elf-linux32.zip -O $TEMP/xtensa-lx106-elf.zip
-elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ] 
+elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
 then
   wget -q --show-progress -P $TEMP https://www.dropbox.com/s/9jecy6j0rai1ou1/xtensa-lx106-elf-cygwin32.zip -O $TEMP/xtensa-lx106-elf.zip
 else

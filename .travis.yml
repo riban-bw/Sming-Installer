@@ -13,7 +13,7 @@ addons:
     - doxygen
 install:
 script:
-- ./install.sh
+- sh ./install.sh
 - cd $SMING_HOME/../samples/Basic_Blink
 - make
 
