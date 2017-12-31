@@ -9,13 +9,13 @@ env:
   - VERSION=3.5.1
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    - bsdtar
-    - doxygen
     - bash
+
+before_install:
+
 install:
+
 script:
 - set -e
 - bash install.sh
