@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 #
 # This script installs Sming V3.5.1 on Posix systems including GNU/Linux, OS X, Cygwin
 #
@@ -52,6 +52,9 @@ then
 elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
 then
   $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/9jecy6j0rai1ou1/xtensa-lx106-elf-cygwin32.zip
+elif [[ "$PLATFORM" == "Darwin x86"* ]]
+then
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/8q9g22di7al1tea/xtensa-lx106-elf-osx.zip
 else
   echo "Unsupported platform $PLATFORM"
   exit 1
