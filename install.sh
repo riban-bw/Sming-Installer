@@ -33,7 +33,7 @@ echo "Downloading Sming packages for $PLATFORM..."
 if [ "$PLATFORM" = "Linux arm6l" ]
 then
   wget -q --show-progress https://www.dropbox.com/s/ofhbz9xpu01xtnp/xtensa-lx106-elf-armv6l.zip -O $TEMP/xtensa-lx106-elf.zip
-elif [ "$PLATFORM" = "Linux i686" ]
+elif [[ "$PLATFORM" == "Linux"* ]]
 then
   wget -q --show-progress -P $TEMP https://www.dropbox.com/s/rjcvejm4wu1er8a/xtensa-lx-elf-linux32.zip -O $TEMP/xtensa-lx106-elf.zip
 elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
