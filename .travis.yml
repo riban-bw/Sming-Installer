@@ -1,6 +1,7 @@
 sudo: false
 os:
 - linux
+- osx
 env: 
   matrix:
   - VERSION=3.5.1
@@ -11,9 +12,10 @@ addons:
     packages:
     - bsdtar
     - doxygen
+    - bash
 install:
 script:
-- sh ./install.sh
+- bash install.sh
 - cd $SMING_HOME/../samples/Basic_Blink
 - make
 
