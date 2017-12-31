@@ -12,7 +12,7 @@
 wget -q --show-progress asdf > /dev/null
 RESULT=$?
 echo "RESULT: $RESULT"
-if [ $RESULT -eq 1 ]
+if [ $RESULT -eq 2 ]
 then
   WGET="wget -q"
 else
