@@ -7,18 +7,9 @@
 # install.sh
 # 
 
-# Check wget version
-WGET_VER=`wget --version|grep "GNU Wget"|awk '{ print $3 }'`
-WGET_MAJ=`echo $WGET_VER|awk -F. '{ print $1 }'`
-WGET_MIN=`echo $WGET_VER|awk -F. '{ print $2 }'`
-echo "wget version: $WGET_MAJ.$WGET_MIN"
-if [ "WGET_MAJ" = "" ]
-then
-  echo wget not found. Please install wget.
-  exit 1
-fi
-
-if [ $WGET_MAJ -ge 1 ] && [ $WGET_MIN -ge 16 ]
+# Check wget supports --show-progress
+wget -q --show-progress asdf > /dev/null &>/dev/null
+if [ $? -eq 4 ]
 then
   WGET="wget -q --show-progress"
 else
