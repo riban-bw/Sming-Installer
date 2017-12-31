@@ -7,6 +7,23 @@
 # install.sh
 # 
 
+# Check wget version
+WGET_VER=`wget --version|grep "GNU Wget"|awk '{ print $3 }'`
+WGET_MAJ=`echo $WGET_VER|awk -F. '{ print $1 }'`
+WGET_MIN=`echo $WGET_VER|awk -F. '{ print $2 }'`
+if [ "WGET_MAJ" = "" ]
+then
+  echo wget not found. Please install wget.
+  exit 1
+fi
+
+if [ $WGET_MAJ -ge 1 ] && [ $WGET_MIN -ge 16 ]
+then
+  WGET="wget -q --show-progress"
+else
+  WGET="wget -q"
+fi
+
 # Check if Sming folder exists
 # TODO: Avoid deleting whole Sming folder in case user keeps other data there
 if [ -d Sming ]
@@ -32,13 +49,13 @@ PLATFORM=`uname -sm`
 echo "Downloading Sming packages for $PLATFORM..."
 if [ "$PLATFORM" = "Linux arm6l" ]
 then
-  wget -q --show-progress https://www.dropbox.com/s/ofhbz9xpu01xtnp/xtensa-lx106-elf-armv6l.zip -O $TEMP/xtensa-lx106-elf.zip
+  $WGET -q --show-progress https://www.dropbox.com/s/ofhbz9xpu01xtnp/xtensa-lx106-elf-armv6l.zip -O $TEMP/xtensa-lx106-elf.zip
 elif [[ "$PLATFORM" == "Linux"* ]]
 then
-  wget -q --show-progress -P $TEMP https://www.dropbox.com/s/rjcvejm4wu1er8a/xtensa-lx-elf-linux32.zip -O $TEMP/xtensa-lx106-elf.zip
+  $WGET -q --show-progress -P $TEMP https://www.dropbox.com/s/rjcvejm4wu1er8a/xtensa-lx-elf-linux32.zip -O $TEMP/xtensa-lx106-elf.zip
 elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
 then
-  wget -q --show-progress -P $TEMP https://www.dropbox.com/s/9jecy6j0rai1ou1/xtensa-lx106-elf-cygwin32.zip -O $TEMP/xtensa-lx106-elf.zip
+  $WGET -q --show-progress -P $TEMP https://www.dropbox.com/s/9jecy6j0rai1ou1/xtensa-lx106-elf-cygwin32.zip -O $TEMP/xtensa-lx106-elf.zip
 else
   echo "Unsupported platform $PLATFORM"
   exit 1
