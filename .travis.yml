@@ -18,7 +18,7 @@ install:
 
 script:
 - set -e
-- . install.sh
+- . ./install.sh
 - cd $SMING_HOME/../samples/Basic_Blink
 - make
 
