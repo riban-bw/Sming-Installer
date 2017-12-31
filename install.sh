@@ -8,12 +8,15 @@
 # 
 
 # Check wget supports --show-progress
-wget -q --show-progress asdf > /dev/null &>/dev/null
-if [ $? -eq 4 ]
+#wget -q --show-progress asdf > /dev/null &>/dev/null
+wget -q --show-progress asdf > /dev/null
+RESULT=$?
+echo "RESULT: $RESULT"
+if [ $RESULT -eq 1 ]
 then
-  WGET="wget -q --show-progress"
-else
   WGET="wget -q"
+else
+  WGET="wget -q --show-progress"
 fi
 
 # Check if Sming folder exists

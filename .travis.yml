@@ -17,6 +17,7 @@ addons:
     - bash
 install:
 script:
+- set -e
 - bash install.sh
 - cd $SMING_HOME/../samples/Basic_Blink
 - make
