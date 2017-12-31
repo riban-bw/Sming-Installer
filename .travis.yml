@@ -1,24 +1,18 @@
-sudo: false
 language: bash
 
 os:
 - linux
+  sudo: false
+  dist: trusty
 - osx
-env: 
-  matrix:
-  - VERSION=3.5.1
-addons:
-  apt:
-    packages:
-    - bash
 
 before_install:
 
 install:
 
 script:
+- . ./install.sh
 - set -e
-- source ./install.sh
 - cd $SMING_HOME/../samples/Basic_Blink
 - make V=1
 - cd $SMING_HOME/../samples/Basic_Ssl
