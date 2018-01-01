@@ -12,6 +12,8 @@ install:
 script:
 - . ./install.sh
 - set -e
+- echo $SMING_HOME
+- echo $ESP_HOME
 - cd $SMING_HOME/../samples/Basic_Blink
 - make V=1
 - cd $SMING_HOME/../samples/Basic_Ssl

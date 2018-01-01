@@ -6,7 +6,7 @@ environment:
   global:
     BASH: C:\cygwin\bin\bash
     CYG_SETUP: C:\cygwin\setup-x86
-	
+
   matrix:
     - build_platform: "x86"
     - build_platform: "x64"
