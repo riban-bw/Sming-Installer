@@ -17,9 +17,9 @@ script:
 - ls $SMING_HOME
 - ls $SMING_HOME/..
 - ls $SMING_HOME/../samples
-- cd $SMING_HOME/../samples/Basic_Blink
+- cd "$SMING_HOME/../samples/Basic_Blink"
 - echo "Building Blink sample"
 - make V=1
 - echo "Building SSL sample"
-- cd $SMING_HOME/../samples/Basic_Ssl
+- cd "$SMING_HOME/../samples/Basic_Ssl"
 - make V=1
