@@ -14,7 +14,7 @@ environment:
 install:
   - '%CYG_SETUP% -qP wget unzip'
 
-  build_script:
+build_script:
   - '%BASH% -lc ./install.sh'
   - '%BASH% -lc echo "SMING_HOME=`pwd`/Sming/Sming" >> /etc/environment'
   - '%BASH% -lc echo "ESP_HOME=`pwd`/Sming/esp-toolkit" >> /etc/environment'
