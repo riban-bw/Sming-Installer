@@ -16,7 +16,7 @@ install:
 
 build_script:
   - '%BASH% -lc "cd $APPVEYOR_BUILD_FOLDER && ./install.sh"'
-  - '%BASH% -lc "cd $APPVEYOR_BUILD_FOLDER &&echo export SMING_HOME=$APPVEYOR_BUILD_FOLDER/Sming/Sming > ~/set_sming_vars'
-  - '%BASH% -lc "echo export ESP_HOME=$APPVEYOR_BUILD_FOLDER/Sming/esp-toolkit >> ~/set_sming_vars"'
+  - '%BASH% -lc "echo export SMING_HOME=$APPVEYOR_BUILD_FOLDER/Sming/Sming | sed 's/\\/\//g'> ~/set_sming_vars'
+  - '%BASH% -lc "echo export ESP_HOME=$APPVEYOR_BUILD_FOLDER/Sming/esp-toolkit | sed 's/\\/\//g' >> ~/set_sming_vars"'
   - '%BASH% -lc ". ~/set_sming_vars && cd $SMING_HOME/../samples/Basic_Blink && make V=1"'
   - '%BASH% -lc ". ~/set_sming_vars && cd $SMING_HOME/../samples/Basic_Ssl && make V=1"'
