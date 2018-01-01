@@ -33,19 +33,19 @@ then
     echo "Deleting `pwd`/Sming..."
     rm -r Sming 2> /dev/null
   else
-    exit 1
+    return 1
   fi
 fi
 if [ -d Sming ]
 then
   echo "Failed to delete Sming folder. Please manually remove before installing."
-  exit 1
+  return 1
 fi
 
 # Download the platform specific cross compiler
 PLATFORM=`uname -sm`
 echo "Downloading Sming packages for $PLATFORM..."
-if [ "$PLATFORM" = "Linux arm6l" ]
+if [ "$PLATFORM" = "Linux armv6l" ]
 then
   $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/9kow2xv0xeaox5e/xtensa-lx106-elf-linux-arm6l.zip
 elif [[ "$PLATFORM" == "Linux i686" ]]
@@ -62,7 +62,7 @@ then
   $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/8q9g22di7al1tea/xtensa-lx106-elf-osx-x86_64.zip?dl=0
 else
   echo "Unsupported platform $PLATFORM"
-  exit 1
+  return 1
 fi
 
 # Download the platform agnostic packages

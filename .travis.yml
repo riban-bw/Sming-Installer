@@ -12,7 +12,6 @@ install:
 script:
 - . ./install.sh
 - set -e
-- ls -l $ESP_HOME/xtensa-lx106-elf/bin/
 - cd $SMING_HOME/../samples/Basic_Blink
 - make V=1
 - cd $SMING_HOME/../samples/Basic_Ssl
