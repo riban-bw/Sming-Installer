@@ -47,19 +47,19 @@ PLATFORM=`uname -sm`
 echo "Downloading Sming packages for $PLATFORM..."
 if [ "$PLATFORM" = "Linux armv6l" ]
 then
-  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/9kow2xv0xeaox5e/xtensa-lx106-elf-linux-arm6l.zip
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/c3f718jiqzh1cvo/xtensa-lx106-elf-linux-armv6l.zip
 elif [[ "$PLATFORM" == "Linux i686" ]]
 then
-  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/c9elu7pjdp87jr5/xtensa-lx106-elf-linux-i686.zip?dl=0
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/c9elu7pjdp87jr5/xtensa-lx106-elf-linux-i686.zip
 elif [[ "$PLATFORM" == "Linux x86_64" ]]
 then
-  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/d2u56kqfbm4twgi/xtensa-lx106-elf-linux-x86_64.zip?dl=0
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/d2u56kqfbm4twgi/xtensa-lx106-elf-linux-x86_64.zip
 elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
 then
   $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/ekz4tyj280y90sm/xtensa-lx106-elf-cygwin-i686.zip
 elif [[ "$PLATFORM" == "Darwin x86"* ]]
 then
-  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/8q9g22di7al1tea/xtensa-lx106-elf-osx-x86_64.zip?dl=0
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/8q9g22di7al1tea/xtensa-lx106-elf-osx-x86_64.zip
 else
   echo "Unsupported platform $PLATFORM"
   return 1

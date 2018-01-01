@@ -16,7 +16,7 @@ install:
 
 build_script:
   - '%BASH% -lc "cd $APPVEYOR_BUILD_FOLDER && ./install.sh"'
-  - '%BASH% -lc "echo "SMING_HOME=`pwd`/Sming/Sming" >> /etc/environment"'
-  - '%BASH% -lc "echo "ESP_HOME=`pwd`/Sming/esp-toolkit" >> /etc/environment"'
+  - '%BASH% -lc echo "SMING_HOME=$APPVEYOR_BUILD_FOLDER/Sming/Sming" >> /etc/environment'
+  - '%BASH% -lc echo "ESP_HOME=$APPVEYOR_BUILD_FOLDER/Sming/esp-toolkit" >> /etc/environment'
   - '%BASH% -lc "cd $SMING_HOME/../samples/Basic_Blink && make V=1"'
   - '%BASH% -lc "cd $SMING_HOME/../samples/Basic_Ssl && make V=1"'
