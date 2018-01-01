@@ -56,7 +56,7 @@ then
   $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/d2u56kqfbm4twgi/xtensa-lx106-elf-linux-x86_64.zip
 elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
 then
-  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/ekz4tyj280y90sm/xtensa-lx106-elf-cygwin-i686.zip
+  $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/1cn969exsnp88ls/xtensa-lx106-elf-cygwin32-i686.zip
 elif [[ "$PLATFORM" == "Darwin x86"* ]]
 then
   $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/8q9g22di7al1tea/xtensa-lx106-elf-osx-x86_64.zip
