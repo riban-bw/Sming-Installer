@@ -14,7 +14,7 @@ script:
 - set -e
 - echo $SMING_HOME
 - echo $ESP_HOME
-- ls $SMING_HOME/../samples/Basic_Blink"
+- ls $SMING_HOME/../samples/Basic_Blink
 - cd $SMING_HOME/../samples/Basic_Blink
 - echo "Building Blink sample"
 - make
