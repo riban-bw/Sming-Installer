@@ -15,6 +15,7 @@ unzip -v &>/dev/null || return 1
 rm --version &>/dev/null || return 1
 uname --version &>/dev/null || return 1
 make --version &>/dev/null || return 1
+gcc --version &>/dev/null || return 1
 
 # Get a valid temp directory
 TEMP=.sming_tmp
@@ -102,7 +103,7 @@ echo "Testing the installation..."
 make -C $SMING_HOME test &>$TEMP/test_results.txt
 if [ $? -ne 0 ]
 then
-  echo "Tests have failed. Please report an issue to https://github.com/riban-bw/Sming-Release/issues with the following information:"
+  echo "[ERROR] Tests have failed. Please report an issue to https://github.com/riban-bw/Sming-Release/issues with the following information:"
   echo "==========================================="
   echo "UNAME: `uname -a`"
   cat $TEMP/test_results.txt
@@ -114,13 +115,18 @@ fi
 rm -r $TEMP
 
 # Final confirmation
+echo " "
 echo "Sming and support tools now installed."
 echo "There are sample projects in $SMING_HOME../samples."
 echo "To get started:"
-echo "   mkdir HelloWorld"
-echo "   cp -r $SMING_HOME../samples/Basic_Blink/* HelloWorld"
-echo "   cd HelloWorld"
+echo "   mkdir -p ~/SmingProjects/HelloWorld"
+echo "   cd ~/SmingProjects/HelloWorld"
+echo "   cp -r $SMING_HOME../samples/Basic_Blink/* ."
 echo "   edit HelloWorld/Makefile-user.mk to set serial port, etc."
 echo "   edit HelloWorld/app/application.cpp with your source code"
-echo "   make "
+echo "   make"
+echo " "
+echo "To upload project to the ESP8266"
+echo "   Connect ESP8266 module to serial port"
+echo "   Ensure COM_PORT is set to a valid serial device in Makefile-user"
 echo "   make flash"

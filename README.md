@@ -1,13 +1,20 @@
 # Sming-Release
-Install the current release of Sming stable versions
+This is a simple installer for [Sming](https://github.com/SmingHub/Sming), a C++ framework for the ESP8266 microcontroller.
 
-Download the [installer](https://raw.githubusercontent.com/riban-bw/Sming-Release/master/install.sh) to the parent folder of where you want to install Sming.
+This installer provides all the tools required to program the ESP8266 using the Sming framework. The aim is to reduce the friction in starting to use Sming. For Sming support visit Sming at github where there are various guides and supporting documentation.
 
-Within a POSIX shell, navigate to the parent folder of where you want to install Sming.
+To install Sming to your home directory (change '~' to your preferred install location), open a POSIX shell, e.g. bash, cygwin32, etc.
 
-Run `. ./install.sh`
+```
+cd ~
+wget https://tinyurl.com/SmingInstall
+. SmingInstall
+rm SmingInstall
+```
 
-# Current version: 3.5.0
+# Current version of Sming: [3.5.0](https://github.com/SmingHub/Sming/releases/tag/3.5.0)
+
+##Status
 
 | Platform                | Status                       |
 |-------------------------|------------------------------|
@@ -24,4 +31,3 @@ Run `. ./install.sh`
 [2-link]: https://travis-ci.org/riban-bw/Sming-Release
 [4-link]: https://ci.appveyor.com/project/riban-bw/sming-release
 [5-link]: https://travis-ci.org/riban-bw/Sming-Release
-
