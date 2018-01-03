@@ -11,7 +11,7 @@ Run `. ./install.sh`
 
 | Platform                | Status                       |
 |-------------------------|------------------------------|
-| Linux i686              | TBC |
+| Linux i686              | PASS |
 | Linux x86_64            | [![Build2][2-badge]][2-link] |
 | Linux armv6l            | PASS |
 | Windows Cygwin32        | [![Build4][4-badge]][4-link] |
