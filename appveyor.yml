@@ -1,5 +1,10 @@
 os: Windows Server 2012 R2
-init: 
+
+only_commits:
+  files:
+    - install.sh
+
+init:
   - git config --global core.autocrlf input
     
 environment:
