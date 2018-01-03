@@ -1,6 +1,5 @@
 language: bash
 sudo: false
-osx_image: xcode9
 
 services:
 - docker
@@ -20,5 +19,3 @@ script:
 - echo $ESP_HOME
 - cd $SMING_HOME
 - make test
-
-- "docker run -i -v \"${PWD}:/MyProgram\" toopher/centos-i386:centos6 /bin/bash -c \"linux32 --32bit i386 . /MyProgram/install.sh\""
