@@ -18,10 +18,10 @@ Run `. ./install.sh`
 | OS X x86_64             | [![Build5][5-badge]][5-link] |
 
 [2-badge]: https://travis-matrix-badges.herokuapp.com/repos/riban-bw/Sming-Release/branches/master/1
-[4-badge]: https://travis-ci.org/riban-bw/Sming-Release.svg?branch=master
+[4-badge]: https://ci.appveyor.com/api/projects/status/3tcob4ifowxd5jfg?svg=true
 [5-badge]: https://travis-matrix-badges.herokuapp.com/repos/riban-bw/Sming-Release/branches/master/2
 
 [2-link]: https://travis-ci.org/riban-bw/Sming-Release
+[4-link]: https://ci.appveyor.com/project/riban-bw/sming-release
 [5-link]: https://travis-ci.org/riban-bw/Sming-Release
-[4-link]: https://travis-ci.org/riban-bw/Sming-Release
 
