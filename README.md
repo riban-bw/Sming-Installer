@@ -9,13 +9,13 @@ Run `. ./install.sh`
 
 # Current version: 3.5.0
 
-| Platform                | Status            |
-|-------------------------|-------------------|
+| Platform                | Status                       |
+|-------------------------|------------------------------|
 | Linux i686              | TBC |
 | Linux x86_64            | [![Build2][2-badge]][2-link] |
 | Linux armv6l            | PASS |
-| Windows Cygwin32        | [!Build4][4-badge]][4-link] |
-| OS X x86_64             | [![Build5][5-badge]][5-link]|
+| Windows Cygwin32        | [![Build4][4-badge]][4-link] |
+| OS X x86_64             | [![Build5][5-badge]][5-link] |
 
 [2-badge]: https://travis-matrix-badges.herokuapp.com/repos/riban-bw/Sming-Release/branches/master/1
 [4-badge]: https://travis-ci.org/riban-bw/Sming-Release.svg?branch=master
