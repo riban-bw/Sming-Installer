@@ -107,7 +107,7 @@ then
   echo "UNAME: `uname -a`"
   cat $TEMP/test_results.txt
   echo "==========================================="
-  exit 1
+  return 1
 fi
 
 #Clean up
