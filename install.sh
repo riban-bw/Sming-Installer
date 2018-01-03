@@ -99,7 +99,7 @@ make -C $SMING_HOME/spiffy clean spiffy &>/dev/null
 
 # Test installation
 echo "Testing the installation..."
-make -C $SMING_HOME &>$TEMP/test_results.txt
+make -C $SMING_HOME test &>$TEMP/test_results.txt
 if [ $? -ne 0 ]
 then
   echo "Tests have failed. Please report an issue to https://github.com/riban-bw/Sming-Release/issues with the following information:"
