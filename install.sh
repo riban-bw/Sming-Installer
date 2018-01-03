@@ -5,7 +5,16 @@
 # Run this script from the parent directory for the Sming installation, e.g. to installs in a directory called Sming in your home directory:
 # cd ~
 # install.sh
-# 
+#
+
+# Check required tools are installed
+echo "Checking required tools are installed..."
+mkdir --version &>/dev/null || return 1
+wget --version &>/dev/null || return 1
+unzip -v &>/dev/null || return 1
+rm --version &>/dev/null || return 1
+uname --version &>/dev/null || return 1
+make --version &>/dev/null || return 1
 
 # Get a valid temp directory
 TEMP=.sming_tmp
@@ -79,9 +88,39 @@ $UNZIP -d Sming/esp-toolkit $TEMP/esptool.zip && echo "esptool installed"
 $UNZIP -d Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip && echo "xtensa-lx106-elf compiler installed"
 
 # TODO: Remove downloaded packages
-rm -r $TEMP
 
 # Set environmental variables
 export ESP_HOME=`pwd`/Sming/esp-toolkit
 export SMING_HOME=`pwd`/Sming/Sming
 
+# Build spiffy
+echo "Building the SPIFF command line tool, spiffy..."
+make -C $SMING_HOME/spiffy clean spiffy &>/dev/null
+
+# Test installation
+echo "Testing the installation..."
+make -C $SMING_HOME &>$TEMP/test_results.txt
+if [ $? -ne 0 ]
+then
+  echo "Tests have failed. Please report an issue to https://github.com/riban-bw/Sming-Release/issues with the following information:"
+  echo "==========================================="
+  echo "UNAME: `uname -a`"
+  cat $TEMP/test_results.txt
+  echo "==========================================="
+  exit 1
+fi
+
+#Clean up
+rm -r $TEMP
+
+# Final confirmation
+echo "Sming and support tools now installed."
+echo "There are sample projects in $SMING_HOME../samples."
+echo "To get started:"
+echo "   mkdir HelloWorld"
+echo "   cp -r $SMING_HOME../samples/Basic_Blink/* HelloWorld"
+echo "   cd HelloWorld"
+echo "   edit HelloWorld/Makefile-user.mk to set serial port, etc."
+echo "   edit HelloWorld/app/application.cpp with your source code"
+echo "   make "
+echo "   make flash"
