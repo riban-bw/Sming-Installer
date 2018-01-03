@@ -18,9 +18,9 @@ Note: This is a simple bash script to install Sming which downloads precompiled 
 
 | Platform         | Notes |  Status                             |
 |------------------|-------|-------------------------------------|
-| Linux i686       | 32-bit Linux | [pass-badge]                 |
+| Linux i686       | 32-bit Linux | ![pass-badge]                 |
 | Linux x86_64     | 64-bit Linux | [![Build2][2-badge]][2-link] |
-| Linux armv6l     | Raspbery Pi  | [pass-badge]                 |
+| Linux armv6l     | Raspbery Pi  | ![pass-badge]                 |
 | Windows Cygwin32 | Windows      | [![Build4][4-badge]][4-link] |
 | OS X x86_64      | Mac OS       | [![Build5][5-badge]][5-link] |
 
