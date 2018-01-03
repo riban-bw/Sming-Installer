@@ -1,5 +1,6 @@
 language: bash
 sudo: false
+osx_image: xcode9
 
 os:
 - linux
