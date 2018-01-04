@@ -17,7 +17,7 @@ matrix:
     - os: osx
       env: ARCH=i686
 
-  script:
+script:
   - set -e
   - 'if [ "$ARCH" = "i686" ]; then
     docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 /MyProgram/install.sh";
