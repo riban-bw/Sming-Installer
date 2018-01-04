@@ -14,7 +14,7 @@ for app in mkdir wget rm uname make gcc
 do
   $app --version &>/dev/null || MISSING+="$app "
 done
-unzip -v &>/dev/null || MISSING+= "unzip "
+unzip -v &>/dev/null || MISSING+="unzip "
 if [ "$MISSING" != "" ]
 then
   echo "Please install $MISSING then re-run installer."
