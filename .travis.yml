@@ -1,4 +1,3 @@
-language: bash
 sudo: false
 
 notifications:
@@ -21,10 +20,10 @@ script:
   - set -e
   - chmod 777 install.sh
   - 'if [ "$ARCH" = "i686" ]; then
-    docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 /MyProgram/install.sh";
+    docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 apt update; apt install -y wget build-essential /MyProgram/install.sh";
     travis_terminate 0;
     fi'
-  - ./install.sh;
-  - . Sming/setenv.sh;
+  - ./install.sh
+  - . Sming/setenv.sh
   - cd $SMING_HOME
   - make test
