@@ -1,9 +1,6 @@
 language: bash
 sudo: false
 
-services:
-- docker
-
 notifications:
   email: false
 
@@ -23,10 +20,10 @@ matrix:
   script:
   - set -e
   - 'if [ "$ARCH" = "i686" ]; then
-	docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 /MyProgram/install.sh";
-	travis_terminate 0;
+    docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 /MyProgram/install.sh";
+    travis_terminate 0;
     fi'
   - ./install.sh;
   - . Sming/setenv.sh;
- - cd $SMING_HOME
- - make test
+  - cd $SMING_HOME
+  - make test
