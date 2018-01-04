@@ -17,7 +17,7 @@ done
 unzip -v &>/dev/null || MISSING+= "unzip "
 if [ "$MISSING" != "" ]
 then
-  echo "Please install $MISSINGthen re-run installer."
+  echo "Please install $MISSING then re-run installer."
   exit 1
 fi
 
