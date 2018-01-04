@@ -15,7 +15,7 @@ env:
 matrix:
   exclude:
     - os: osx
-    - env: ARCH=i686
+      env: ARCH=i686
 
   script:
   - set -e
