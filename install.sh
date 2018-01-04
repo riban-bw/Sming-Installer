@@ -10,7 +10,7 @@
 # Check required tools are installed
 echo "Checking required tools are installed..."
 MISSING=""
-for app in mkdir wget rm uname make gcc
+for app in mkdir wget rm uname make g++ python
 do
   $app --version &>/dev/null || MISSING+="$app "
 done
