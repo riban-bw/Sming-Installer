@@ -41,7 +41,7 @@ Note: This is a simple bash script to install Sming which downloads precompiled 
 
 ESP toolkit is built from [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk) by pfalcon
 
-[Sming]()https://github.com/SmingHub/Sming) developed by [SmingHub community](https://github.com/SmingHub/Sming/graphs/contributors)
+[Sming](https://github.com/SmingHub/Sming) developed by [SmingHub community](https://github.com/SmingHub/Sming/graphs/contributors)
 
 [esptool2](https://github.com/raburton/esptool2) is provided by raburton (GPL V3)
 
