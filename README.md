@@ -36,3 +36,19 @@ Note: This is a simple bash script to install Sming which downloads precompiled 
 
 [travis-link]: https://travis-ci.org/riban-bw/Sming-Release
 [appveyor-link]: https://ci.appveyor.com/project/riban-bw/sming-release
+
+# Credits
+
+ESP toolkit is built from [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk) by pfalcon
+
+[Sming]()https://github.com/SmingHub/Sming) developed by [SmingHub community](https://github.com/SmingHub/Sming/graphs/contributors)
+
+[esptool2](https://github.com/raburton/esptool2) is provided by raburton (GPL V3)
+
+[ESP SDK](http://bbs.espressif.com/viewforum.php?f=46) released by Espressif Systems
+
+Travis-CI status badges for each build are provided by [bjfish](https://github.com/bjfish/travis-matrix-badges)
+
+Appveyor-CI status badges for each build are provided by [tzachshabtay](https://github.com/tzachshabtay/appveyor-matrix-badges)
+
+[Sming-Release](https://github.com/riban-bw/Sming-Release) developed by riban-bw
