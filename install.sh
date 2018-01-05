@@ -9,13 +9,17 @@
 
 # Check required tools are installed
 echo "Checking required tools are installed..."
-mkdir --version &>/dev/null || return 1
-wget --version &>/dev/null || return 1
-unzip -v &>/dev/null || return 1
-rm --version &>/dev/null || return 1
-uname --version &>/dev/null || return 1
-make --version &>/dev/null || return 1
-gcc --version &>/dev/null || return 1
+MISSING=""
+for app in mkdir wget rm uname make gcc
+do
+  $app --version &>/dev/null || MISSING+="$app "
+done
+unzip -v &>/dev/null || MISSING+= "unzip "
+if [ "$MISSING" != "" ]
+then
+  echo "Please install $MISSING then re-run installer."
+  exit 1
+fi
 
 # Get a valid temp directory
 TEMP=.sming_tmp
@@ -43,13 +47,13 @@ then
     echo "Deleting `pwd`/Sming..."
     rm -r Sming 2> /dev/null
   else
-    return 1
+    exit 1
   fi
 fi
 if [ -d Sming ]
 then
   echo "Failed to delete Sming folder. Please manually remove before installing."
-  return 1
+  exit 1
 fi
 
 # Download the platform specific cross compiler
@@ -72,7 +76,7 @@ then
   $WGET -O $TEMP/xtensa-lx106-elf.zip https://www.dropbox.com/s/8q9g22di7al1tea/xtensa-lx106-elf-osx-x86_64.zip
 else
   echo "Unsupported platform $PLATFORM"
-  return 1
+  exit 1
 fi
 
 # Download the platform agnostic packages
@@ -91,8 +95,12 @@ $UNZIP -d Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip && echo "xtensa-lx106-elf
 # TODO: Remove downloaded packages
 
 # Set environmental variables
-export ESP_HOME=`pwd`/Sming/esp-toolkit
-export SMING_HOME=`pwd`/Sming/Sming
+echo "#!/bin/bash" > Sming/setenv.sh
+echo "export ESP_HOME=`pwd`/Sming/esp-toolkit" >> Sming/setenv.sh
+echo "export SMING_HOME=`pwd`/Sming/Sming" >> Sming/setenv.sh
+chmod 755 Sming/setenv.sh
+
+. Sming/setenv.sh
 
 # Build spiffy
 echo "Building the SPIFF command line tool, spiffy..."
@@ -108,7 +116,7 @@ then
   echo "UNAME: `uname -a`"
   cat $TEMP/test_results.txt
   echo "==========================================="
-  return 1
+  exit 1
 fi
 
 #Clean up
@@ -119,6 +127,7 @@ echo " "
 echo "Sming and support tools now installed."
 echo "There are sample projects in $SMING_HOME../samples."
 echo "To get started:"
+echo "  " `pwd` "/set_env.sh"
 echo "   mkdir -p ~/SmingProjects/HelloWorld"
 echo "   cd ~/SmingProjects/HelloWorld"
 echo "   cp -r $SMING_HOME../samples/Basic_Blink/* ."
