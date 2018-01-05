@@ -16,14 +16,14 @@ Note: This is a simple bash script to install Sming which downloads precompiled 
 
 # Current version of Sming: [3.5.0](https://github.com/SmingHub/Sming/releases/tag/3.5.0)
 
-| Platform         | Notes        |  Status                             |
-|------------------|--------------|-------------------------------------|
-| Linux i686       | 32-bit Linux | [![Build1][1-Linux_i686-badge]][travis-link]   |
-| Linux x86_64     | 64-bit Linux | [![Build2][Linux_x86_64-badge]][travis-link]   |
-| Linux armv6l     | Raspbery Pi  | ![pass-badge]                       |
-| Cygwin32 i686    | Windows      | [![Build4][Cygwin32_i686-badge]][appveyor-link] |
+| Platform         | Notes        |  Status                                           |
+|------------------|--------------|---------------------------------------------------|
+| Linux i686       | 32-bit Linux | [![Build1][Linux_i686-badge]][travis-link]      |
+| Linux x86_64     | 64-bit Linux | [![Build2][Linux_x86_64-badge]][travis-link]      |
+| Linux armv6l     | Raspbery Pi  | ![pass-badge]                                     |
+| Cygwin32 i686    | Windows      | [![Build4][Cygwin32_i686-badge]][appveyor-link]   |
 | Cygwin32 x86_64  | Windows      | [![Build4][Cygwin32_x86_64-badge]][appveyor-link] |
-| OS X x86_64      | Mac OS       | [![Build5][OSX-badge]][travis-link]   |
+| OS X x86_64      | Mac OS       | [![Build5][OSX-badge]][travis-link]               |
 
 [pass-badge]: https://img.shields.io/badge/build-passing-brightgreen.svg
 [fail-badge]: https://img.shields.io/badge/build-failure-red.svg
