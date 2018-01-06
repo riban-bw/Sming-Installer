@@ -7,9 +7,9 @@ To install Sming to your home directory (change '~' to your preferred install lo
 
 ```
 cd ~
-wget https://tinyurl.com/SmingInstall
-. SmingInstall
-rm SmingInstall
+wget https://github.com/riban-bw/Sming-Release/raw/master/install.sh
+./install.sh
+rm install.sh
 ```
 
 Note: This is a simple bash script to install Sming which downloads precompiled packages. The actual heavy lifting is done by the Sming developers. This installer is here to ease your transition into the fun world of IoT development. Good luck and have fun.
