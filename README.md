@@ -8,6 +8,7 @@ To install Sming to your home directory (change '~' to your preferred install lo
 ```
 cd ~
 wget https://github.com/riban-bw/Sming-Release/raw/master/install.sh
+chmod u+x install.sh
 ./install.sh
 rm install.sh
 ```

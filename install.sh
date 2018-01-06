@@ -2,6 +2,8 @@
 #
 # This script installs Sming V3.5.1 on Posix systems including GNU/Linux, OS X, Cygwin
 #
+# Author: Brian Walton (brian@riban.co.uk)
+#
 # Run this script from the parent directory for the Sming installation, e.g. to installs in a directory called Sming in your home directory:
 # cd ~
 # install.sh
