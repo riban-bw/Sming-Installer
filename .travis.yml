@@ -25,6 +25,6 @@ script:
     travis_terminate 0;
     fi'
   - ./install.sh
-  - . Sming/setenv.sh
+  - . Sming/setenv
   - cd $SMING_HOME
   - make test
