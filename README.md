@@ -13,6 +13,14 @@ chmod u+x install.sh
 rm install.sh
 ```
 
+A file called _setenv_ is created which may be sourced to set SMING_HOME and ESP_HOME:
+
+```
+. ~/Sming/setenv
+```
+
+_setenv_ may also be included in project Makefile.
+
 Note: This is a simple bash script to install Sming which downloads precompiled packages. The actual heavy lifting is done by the Sming developers. This installer is here to ease your transition into the fun world of IoT development. Good luck and have fun.
 
 # Current version of Sming: [3.5.0](https://github.com/SmingHub/Sming/releases/tag/3.5.0)
@@ -24,7 +32,7 @@ Note: This is a simple bash script to install Sming which downloads precompiled 
 | Linux armv6l     | Raspbery Pi  | ![pass-badge]                                     |
 | Cygwin32 i686    | Windows      | [![Build4][Cygwin32_i686-badge]][appveyor-link]   |
 | Cygwin32 x86_64  | Windows      | [![Build4][Cygwin32_x86_64-badge]][appveyor-link] |
-| OS X x86_64      | Mac OS       | [![Build5][OSX-badge]][travis-link]               |
+| macOS x86_64     | OS X Dawin   | [![Build5][OSX-badge]][travis-link]               |
 
 [pass-badge]: https://img.shields.io/badge/build-passing-brightgreen.svg
 [fail-badge]: https://img.shields.io/badge/build-failure-red.svg
