@@ -97,8 +97,8 @@ $UNZIP -d Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip && echo "xtensa-lx106-elf
 # TODO: Remove downloaded packages
 
 # Set environmental variables
-echo "ESP_HOME=`pwd`/Sming/esp-toolkit" > Sming/setenv
-echo "SMING_HOME=`pwd`/Sming/Sming" >> Sming/setenv
+echo "export ESP_HOME=`pwd`/Sming/esp-toolkit" > Sming/setenv
+echo "export SMING_HOME=`pwd`/Sming/Sming" >> Sming/setenv
 chmod 755 Sming/setenv
 
 . Sming/setenv

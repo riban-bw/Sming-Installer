@@ -19,8 +19,6 @@ A file called _setenv_ is created which may be sourced to set SMING_HOME and ESP
 . ~/Sming/setenv
 ```
 
-_setenv_ may also be included in project Makefile.
-
 Note: This is a simple bash script to install Sming which downloads precompiled packages. The actual heavy lifting is done by the Sming developers. This installer is here to ease your transition into the fun world of IoT development. Good luck and have fun.
 
 # Current version of Sming: [3.5.0](https://github.com/SmingHub/Sming/releases/tag/3.5.0)
