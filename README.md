@@ -21,6 +21,24 @@ A file called _setenv_ is created which may be sourced to set SMING_HOME and ESP
 
 Note: This is a simple bash script to install Sming which downloads precompiled packages. The actual heavy lifting is done by the Sming developers. This installer is here to ease your transition into the fun world of IoT development. Good luck and have fun.
 
+The script accepts command line switches. For help:
+
+```
+./install.sh -h
+```
+
+Individual modules may be (re)installed using the -i switch, e.g.
+
+```
+./install.sh -i SDK
+```
+
+By default all modules are installed and user is prompted for action if an existing module is detected as being installed. This behaviour can be overriden, e.g. to install the SDK and the compiler and backup any exisiting installions:
+
+```
+./install.sh -b -i XTENSA -i SDK
+```
+
 # Current version of Sming: [3.5.0](https://github.com/SmingHub/Sming/releases/tag/3.5.0)
 
 | Platform         | Notes        |  Status                                           |
