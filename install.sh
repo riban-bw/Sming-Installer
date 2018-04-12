@@ -213,19 +213,19 @@ then
 	Debug 1 "Downloading Sming packages for $PLATFORM..."
 	if [ "$PLATFORM" = "Linux armv6l" ]
 	then
-	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/:xtensa-lx106-elf-linux-armv6l.zip
+	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-linux-armv6l.zip
 	elif [[ "$PLATFORM" == "Linux i686" ]]
 	then
-	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/:xtensa-lx106-elf-cygwin32-i686.zip
+	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-cygwin32-i686.zip
 	elif [[ "$PLATFORM" == "Linux x86_64" ]]
 	then
-	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/:xtensa-lx106-elf-linux-x86_64.zip
+	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-linux-x86_64.zip
 	elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
 	then
-	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/:xtensa-lx106-elf-cygwin32-i686.zip
+	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-cygwin32-i686.zip
 	elif [[ "$PLATFORM" == "Darwin x86"* ]]
 	then
-	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/:xtensa-lx106-elf-osx-x86_64.zip
+	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-osx-x86_64.zip
 	else
 	  Debug 1 "Unsupported platform $PLATFORM"
 	  exit 1
@@ -235,16 +235,16 @@ fi
 # Download the platform agnostic packages
 if [ $SMING -eq 1 ]
 then
-	$WGET -O $TEMP/Sming.zip https://dl.bintray.com/sming-bw/Sming-Installer/:Sming-3.5.0_20171231.zip
+	$WGET -O $TEMP/Sming.zip https://dl.bintray.com/sming-bw/Sming-Installer/Sming-3.5.0_20171231.zip
 fi
 if [ $SDK -eq 1 ]
 then
-  $WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/:ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
-  #$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/:ESP8266_NONOS_SDK-2.1.0.zip
+  $WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
+  #$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK-2.1.0.zip
 fi
 if [ $ESPTOOL -eq 1 ]
 then
-  $WGET -O $TEMP/esptool.zip https://dl.bintray.com/sming-bw/Sming-Installer/:esptool.zip
+  $WGET -O $TEMP/esptool.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool.zip
 fi
 
 # Install the packages
