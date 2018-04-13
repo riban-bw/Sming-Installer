@@ -21,7 +21,7 @@ Debug()
 	then
 		return
 	fi
-	echo "$2"
+	echo -e "$2"
 }
 
 # Check if a module is already installed
@@ -299,19 +299,17 @@ fi
 rm -r $TEMP
 
 # Final confirmation
-Debug 1 " "
-Debug 1 "Sming and support tools now installed."
+Debug 1 "\nSming and support tools now installed."
 Debug 1 "There are sample projects in $SMING_HOME../samples."
-Debug 1 "To get started:"
-Debug 1 "  " `pwd` "/set_env"
+Debug 1 "To get started\n:"
+Debug 1 "   . $(pwd)/set_env"
 Debug 1 "   mkdir -p ~/SmingProjects/HelloWorld"
 Debug 1 "   cd ~/SmingProjects/HelloWorld"
-Debug 1 "   cp -r $SMING_HOME../samples/Basic_Blink/* ."
+Debug 1 "   cp -r $SMING_HOME/../samples/Basic_Blink/* ."
 Debug 1 "   edit HelloWorld/Makefile-user.mk to set serial port, etc."
 Debug 1 "   edit HelloWorld/app/application.cpp with your source code"
 Debug 1 "   make"
-Debug 1 " "
-Debug 1 "To upload project to the ESP8266"
+Debug 1 "\nTo upload project to the ESP8266:\n"
 Debug 1 "   Connect ESP8266 module to serial port"
 Debug 1 "   Ensure COM_PORT is set to a valid serial device in Makefile-user"
 Debug 1 "   make flash"
