@@ -216,7 +216,7 @@ then
 	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-linux-armv6l.zip
 	elif [[ "$PLATFORM" == "Linux i686" ]]
 	then
-	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-cygwin32-i686.zip
+	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-linux-i686.zip
 	elif [[ "$PLATFORM" == "Linux x86_64" ]]
 	then
 	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-linux-x86_64.zip
