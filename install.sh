@@ -287,7 +287,7 @@ Debug 1 "Testing the installation..."
 make -C $SMING_HOME test &>$TEMP/test_results.txt
 if [ $? -ne 0 ]
 then
-  Debug 1 "[ERROR] Tests have failed. Please report an issue to https://github.com/riban-bw/Sming-Release/issues with the following information:"
+  Debug 1 "[ERROR] Tests have failed. Please report an issue to https://github.com/riban-bw/Sming-Installer/issues with the following information:"
   Debug 1 "==========================================="
   Debug 1 "UNAME: `uname -a`"
   cat $TEMP/test_results.txt
