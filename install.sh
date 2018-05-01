@@ -4,7 +4,7 @@
 #
 # Author: Brian Walton (brian@riban.co.uk)
 #
-# Run this script from the parent directory for the Sming installation, e.g. to installs in a directory called Sming in your home directory:
+# Run this script from the parent directory for the Sming installation, e.g. to install in a directory called Sming in your home directory:
 # cd ~
 # install.sh
 #
@@ -25,7 +25,7 @@ Debug()
 }
 
 # Check if a module is already installed
-# Offer user choice to backup, delete, exit or skip instalation step
+# Offer user choice to backup, delete, exit or skip installation step
 # param Module name
 # param Module relative installation path
 CheckModule()
@@ -59,19 +59,23 @@ CheckModule()
 	fi
 }
 
-# Initalise variables
+# Initialise variables
 FORCE=A
 SMING=0
 SDK=0
 ESPTOOL=0
+ESPTOOL2=0
 XTENSA=0
 SPIFFY=0
 ALL=1
 VERBOSE=0
 SILENT=0
+DOWNLOAD=1
+SMING_VERSION=3.5.1
+FAILED=0
 
 # Parse command line
-while getopts ":hVSdbsi:" opt; do
+while getopts ":hVSdbsni:" opt; do
   case ${opt} in
     [h,\?]) # Help, Invalid option
 	  echo "Usage: $0 [options]"
@@ -83,11 +87,13 @@ while getopts ":hVSdbsi:" opt; do
 	  echo "    -d             Delete any modules already installed - no questions"
 	  echo "    -b             Backup any modules already installed - no questions"
 	  echo "    -s             Skip any modules already installed - no questions"
+	  echo "    -n             Do not download new copies of packages if already downloaded"
 	  echo "    -i <module>    Install <module>"
 	  echo "      Modules:"
 	  echo "        sming      SMING framework"
 	  echo "        sdk        ESP8266 SDK"
 	  echo "        esptool    esptool.py"
+	  echo "        esptool2   esptool2 firmware manipulation tool"
 	  echo "        xtensa     XTENSA c/c++ compiler"
 	  echo "        spiffy     SPIFFS file system tool"
 	  echo "        all        Install all modules (default)"
@@ -110,18 +116,25 @@ while getopts ":hVSdbsi:" opt; do
 	s ) # Skip existing installed modules
 	  FORCE=s
 	  ;;
+	n ) # Do not download if not required
+	  DOWNLOAD=0
+	  ;;
 	i ) # Install module
 		case ${OPTARG} in
 		  sming )
 		    SMING=1
 			ALL=0
 		    ;;
-		  skd )
+		  sdk )
 		    SDK=1
 			ALL=0
             ;;
           esptool )
 		    ESPTOOL=1
+			ALL=0
+            ;;
+          esptool2 )
+		    ESPTOOL2=1
 			ALL=0
             ;;
           xtensa )
@@ -154,6 +167,7 @@ then
   SMING=1
   SDK=1
   ESPTOOL=1
+  ESPTOOL2=1
   XTENSA=1
   SPIFFY=1
 fi
@@ -161,16 +175,18 @@ fi
 if [ $SMING -eq 1 ]; then CheckModule SMING Sming/Sming;fi
 if [ $SDK -eq 1 ]; then CheckModule SDK Sming/esp-toolkit/sdk;fi
 if [ $ESPTOOL -eq 1 ]; then CheckModule ESPTOOL Sming/esp-toolkit/esptool;fi
+if [ $ESPTOOL2 -eq 1 ]; then CheckModule ESPTOOL2 Sming/tools/esptool2;fi
 if [ $XTENSA -eq 1 ]; then CheckModule XTENSA Sming/esp-toolkit/xtensa-lx106-elf;fi
-if [ $SPIFFY -eq 1 ]; then CheckModule SPIFFY Sming/Sming/spiffy/spiffy;fi
+if [ $SPIFFY -eq 1 ]; then CheckModule SPIFFY Sming/tools/spiffy;fi
 
-Debug 2 "SMING:   $SMING"
-Debug 2 "SDK:     $SDK"
-Debug 2 "ESPTOOL: $ESPTOOL"
-Debug 2 "XTENSA:  $XTENSA"
-Debug 2 "SPIFFY:  $SPIFFY"
+Debug 2 "SMING:    $SMING"
+Debug 2 "SDK:      $SDK"
+Debug 2 "ESPTOOL:  $ESPTOOL"
+Debug 2 "ESPTOOL2: $ESPTOOL2"
+Debug 2 "XTENSA:   $XTENSA"
+Debug 2 "SPIFFY:   $SPIFFY"
 
-INSTALL=$(($SMING + $SDK + $ESPTOOL + $XTENSA + $SPIFFY))
+INSTALL=$(($SMING + $SDK + $ESPTOOL + $ESPTOOL2 + $XTENSA + $SPIFFY))
 if [ $INSTALL -eq 0 ]
 then
   Debug 1 "Nothing selected to install"
@@ -180,15 +196,15 @@ fi
 # Check required tools are installed
 Debug 1 "Checking required tools are installed..."
 MISSING=""
-for app in mkdir wget rm uname make g++ python
+for app in mkdir wget rm uname make python
 do
   $app --version &>/dev/null || MISSING+="$app "
 done
 unzip -v &>/dev/null || MISSING+="unzip "
 if [ "$MISSING" != "" ]
 then
-  Debug 1 "Please install $MISSING then re-run installer."
-  exit 1
+	Debug 1 "Please install $MISSING then re-run installer."
+	exit 1
 fi
 
 # Get a valid temp directory
@@ -199,7 +215,7 @@ mkdir -p $TEMP
 wget -q --show-progress asdf &>/dev/null
 if [ $? -eq 2 ]
 then
-  WGET="wget "
+  WGET="wget"
 else
   WGET="wget -q --show-progress"
 fi
@@ -208,9 +224,9 @@ UNZIP="unzip -oq"
 
 # Download the platform specific cross compiler
 PLATFORM=`uname -sm`
-if [ $XTENSA -eq 1 ]
+if [ $XTENSA -eq 1 ] && ( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/xtensa-lx106-elf.zip ] )
 then
-	Debug 1 "Downloading Sming packages for $PLATFORM..."
+	Debug 1 "Downloading toolchain for $PLATFORM..."
 	if [ "$PLATFORM" = "Linux armv6l" ]
 	then
 	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-linux-armv6l.zip
@@ -228,30 +244,120 @@ then
 	  $WGET -O $TEMP/xtensa-lx106-elf.zip https://dl.bintray.com/sming-bw/Sming-Installer/xtensa-lx106-elf-osx-x86_64.zip
 	else
 	  Debug 1 "Unsupported platform $PLATFORM"
+	  Debug 1 "Please report at https://github.com/riban-bw/Sming-Installer/issues"
 	  exit 1
+	fi
+	if [ $? -ne 0 ]
+	then
+		echo "Failed to download toolchain package"
+		FAILED=1
+	fi
+fi
+
+if [ $ESPTOOL2 -eq 1 ] && ( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/esptool2.zip ] )
+then
+	Debug 1 "Downloading esptool2 binary for $PLATFORM..."
+	if [ "$PLATFORM" = "Linux armv6l" ]
+	then
+	  $WGET -O $TEMP/esptool2.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool2-linux-armv6l.zip
+	elif [[ "$PLATFORM" == "Linux i686" ]]
+	then
+	  $WGET -O $TEMP/esptool2.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool2-linux-i686.zip
+	elif [[ "$PLATFORM" == "Linux x86_64" ]]
+	then
+	  $WGET -O $TEMP/esptool2.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool2-linux-x86_64.zip
+	elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
+	then
+	  $WGET -O $TEMP/esptool2.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool2-cygwin32-i686.zip
+	elif [[ "$PLATFORM" == "Darwin x86"* ]]
+	then
+	  $WGET -O $TEMP/esptool2.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool2-osx-x86_64.zip
+	else
+	  Debug 1 "Unsupported platform $PLATFORM"
+	  exit 1
+	fi
+	if [ $? -ne 0 ]
+	then
+		echo "Failed to download esptool2 package"
+		FAILED=1
+	fi
+fi
+
+if [ $SPIFFY -eq 1 ] && ( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/spiffy.zip ] )
+then
+	Debug 1 "Downloading spiffy binary for $PLATFORM..."
+	if [ "$PLATFORM" = "Linux armv6l" ]
+	then
+	  $WGET -O $TEMP/spiffy.zip https://dl.bintray.com/sming-bw/Sming-Installer/spiffy-linux-armv6l.zip
+	elif [[ "$PLATFORM" == "Linux i686" ]]
+	then
+	  $WGET -O $TEMP/spiffy.zip https://dl.bintray.com/sming-bw/Sming-Installer/spiffy-linux-i686.zip
+	elif [[ "$PLATFORM" == "Linux x86_64" ]]
+	then
+	  $WGET -O $TEMP/spiffy.zip https://dl.bintray.com/sming-bw/Sming-Installer/spiffy-linux-x86_64.zip
+	elif [[ "$PLATFORM" == "CYGWIN_NT"*"WOW i686" ]]
+	then
+	  $WGET -O $TEMP/spiffy.zip https://dl.bintray.com/sming-bw/Sming-Installer/spiffy-cygwin32-i686.zip
+	elif [[ "$PLATFORM" == "Darwin x86"* ]]
+	then
+	  $WGET -O $TEMP/spiffy.zip https://dl.bintray.com/sming-bw/Sming-Installer/spiffy-osx-x86_64.zip
+	else
+	  Debug 1 "Unsupported platform $PLATFORM"
+	  exit 1
+	fi
+	if [ $? -ne 0 ]
+	then
+		echo "Failed to download spiffy package"
+		FAILED=1
 	fi
 fi
 
 # Download the platform agnostic packages
-if [ $SMING -eq 1 ]
+if [ $SMING -eq 1 ] && ( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/Sming.zip ] )
 then
-	$WGET -O $TEMP/Sming.zip https://dl.bintray.com/sming-bw/Sming-Installer/Sming-3.5.0_20171231.zip
+	$WGET -O $TEMP/Sming.zip https://dl.bintray.com/sming-bw/Sming-Installer/Sming-$SMING_VERSION.zip
+	if [ $? -ne 0 ]
+	then
+		echo "Failed to download Sming package"
+		FAILED=1
+	fi
 fi
-if [ $SDK -eq 1 ]
+if [ $SDK -eq 1 ] &&( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/SDK.zip ] )
 then
-  $WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
-  #$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK-2.1.0.zip
+	$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
+	#$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK-2.1.0.zip
+	if [ $? -ne 0 ]
+	then
+		echo "Failed to download SDK package"
+		FAILED=1
+	fi
 fi
-if [ $ESPTOOL -eq 1 ]
+if [ $ESPTOOL -eq 1 ] &&( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/esptool.zip ] )
 then
-  $WGET -O $TEMP/esptool.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool.zip
+	$WGET -O $TEMP/esptool.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool.zip
+	if [ $? -ne 0 ]
+	then
+		echo "Failed to download esptool package"
+		FAILED=1
+	fi
+fi
+
+if [ $FAILED -eq 1 ]
+then
+	echo "Some packages failed to download. Check Internet connectivity then try running"
+	echo "  ./install -n"
+	exit 1
 fi
 
 # Install the packages
-Debug 1 "Installing Sming to `pwd`/Sming..."
+Debug 1 "Installing Sming to $(pwd)/Sming..."
 if [ $SMING -eq 1 ]
 then
   $UNZIP $TEMP/Sming.zip && Debug 1 "Sming installed"
+fi
+if [ $XTENSA -eq 1 ]
+then
+  $UNZIP -d Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip && Debug 1 "xtensa-lx106-elf toolchain installed"
 fi
 if [ $SDK -eq 1 ]
 then
@@ -259,31 +365,29 @@ then
 fi
 if [ $ESPTOOL -eq 1 ]
 then
-  $UNZIP -d Sming/esp-toolkit $TEMP/esptool.zip && Debug 1 "esptool installed"
+  $UNZIP -d Sming/esp-toolkit $TEMP/esptool.zip && Debug 1 "esptool.py installed"
 fi
-if [ $ESPTOOL -eq 1 ]
+if [ $ESPTOOL2 -eq 1 ]
 then
-  $UNZIP -d Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip && Debug 1 "xtensa-lx106-elf compiler installed"
+  $UNZIP -d Sming/tools/esptool2 $TEMP/esptool2.zip && Debug 1 "esptool2 installed"
+fi
+if [ $SPIFFY -eq 1 ]
+then
+  $UNZIP -d Sming/tools/spiffy $TEMP/spiffy.zip && Debug 1 "spiffy installed"
 fi
 
 # TODO: Remove downloaded packages
 
 # Set environmental variables
-echo "export ESP_HOME=`pwd`/Sming/esp-toolkit" > Sming/setenv
-echo "export SMING_HOME=`pwd`/Sming/Sming" >> Sming/setenv
+echo "export ESP_HOME=$(pwd)/Sming/esp-toolkit" > Sming/setenv
+echo "export SMING_HOME=$(pwd)/Sming/Sming" >> Sming/setenv
 chmod 755 Sming/setenv
 
 . Sming/setenv
 
-if [ $SPIFFY -eq 1 ]
-then
-  # Build spiffy
-  Debug 1 "Building the SPIFF command line tool, spiffy..."
-  make -C $SMING_HOME/spiffy clean spiffy &>/dev/null
-fi
-
 # Test installation
 Debug 1 "Testing the installation..."
+#TODO Display progress summary (this now builds the SMING libraries so takes a long time)
 make -C $SMING_HOME test &>$TEMP/test_results.txt
 if [ $? -ne 0 ]
 then
@@ -296,13 +400,13 @@ then
 fi
 
 #Clean up
-rm -r $TEMP
+# rm -r $TEMP
 
 # Final confirmation
 Debug 1 "\nSming and support tools now installed."
 Debug 1 "There are sample projects in $SMING_HOME../samples."
 Debug 1 "To get started\n:"
-Debug 1 "   . $(pwd)/set_env"
+Debug 1 "   . $(pwd)/Sming/setenv"
 Debug 1 "   mkdir -p ~/SmingProjects/HelloWorld"
 Debug 1 "   cd ~/SmingProjects/HelloWorld"
 Debug 1 "   cp -r $SMING_HOME/../samples/Basic_Blink/* ."
