@@ -315,6 +315,7 @@ fi
 # Download the platform agnostic packages
 if [ $SMING -eq 1 ] && ( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/Sming.zip ] )
 then
+	Debug 1 "Downloading Sming $SMING-VERSION..."
 	$WGET -O $TEMP/Sming.zip https://dl.bintray.com/sming-bw/Sming-Installer/Sming-$SMING_VERSION.zip
 	if [ $? -ne 0 ]
 	then
@@ -324,6 +325,7 @@ then
 fi
 if [ $SDK -eq 1 ] &&( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/SDK.zip ] )
 then
+	Debug 1 "Downloading SDK..."
 	$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
 	#$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK-2.1.0.zip
 	if [ $? -ne 0 ]
@@ -334,6 +336,7 @@ then
 fi
 if [ $ESPTOOL -eq 1 ] &&( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/esptool.zip ] )
 then
+	Debug 1 "Downloading esptool..."
 	$WGET -O $TEMP/esptool.zip https://dl.bintray.com/sming-bw/Sming-Installer/esptool.zip
 	if [ $? -ne 0 ]
 	then
