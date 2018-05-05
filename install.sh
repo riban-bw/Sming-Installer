@@ -26,12 +26,10 @@ Debug()
 
 # Check if a module is already installed
 # Offer user choice to backup, delete, exit or skip installation step
-# param Module name
-# param Module relative installation path
+# param Module relative installation path (folder or file)
 CheckModule()
 {
-	module=$1
-	path=$2
+	path=$1
 	RESPONSE=$FORCE
 	if [ ${!1} -eq 1 ]
 	then
@@ -39,7 +37,7 @@ CheckModule()
 		then
 			if [ "$FORCE" = "A" ]
 			then
-				echo "$1 appears to be installed at ./$path. Backup, Delete, Exit or Skip? [b/d/e/S]"
+				echo "$1 appears to be installed at ./$path. Backup, Delete, Exit or Skip? [b/d/e/s]"
 				read RESPONSE
 			fi
 			if [ "$RESPONSE" = "b" ]
@@ -172,12 +170,12 @@ then
   SPIFFY=1
 fi
 
-if [ $SMING -eq 1 ]; then CheckModule SMING Sming/Sming;fi
-if [ $SDK -eq 1 ]; then CheckModule SDK Sming/esp-toolkit/sdk;fi
-if [ $ESPTOOL -eq 1 ]; then CheckModule ESPTOOL Sming/esp-toolkit/esptool;fi
-if [ $ESPTOOL2 -eq 1 ]; then CheckModule ESPTOOL2 Sming/tools/esptool2;fi
-if [ $XTENSA -eq 1 ]; then CheckModule XTENSA Sming/esp-toolkit/xtensa-lx106-elf;fi
-if [ $SPIFFY -eq 1 ]; then CheckModule SPIFFY Sming/tools/spiffy;fi
+if [ $SMING -eq 1 ]; then CheckModule Sming/Sming;fi
+if [ $SDK -eq 1 ]; then CheckModule Sming/esp-toolkit/sdk;fi
+if [ $ESPTOOL -eq 1 ]; then CheckModule Sming/esp-toolkit/esptool;fi
+if [ $ESPTOOL2 -eq 1 ]; then CheckModule Sming/tools/esptool2;fi
+if [ $XTENSA -eq 1 ]; then CheckModule Sming/esp-toolkit/xtensa-lx106-elf;fi
+if [ $SPIFFY -eq 1 ]; then CheckModule Sming/tools/spiffy;fi
 
 Debug 2 "SMING:    $SMING"
 Debug 2 "SDK:      $SDK"
