@@ -16,9 +16,7 @@ matrix:
   exclude:
     - os: osx
       env: ARCH=i686
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gnu-sed; fi
-  
+
 script:
   - set -e
   - chmod 777 install.sh
