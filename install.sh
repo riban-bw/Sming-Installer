@@ -193,7 +193,11 @@ Debug 1 "Checking required tools are installed..."
 MISSING=""
 for app in mkdir wget rm uname make python
 do
-  $app --version &>/dev/null || MISSING+="$app "
+  $app --version &>/dev/null
+  if [ $? -eq 127 ]
+  then
+    MISSING+="$app "
+  fi
 done
 unzip -v &>/dev/null || MISSING+="unzip "
 if [ "$MISSING" != "" ]
