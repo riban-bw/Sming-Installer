@@ -31,28 +31,25 @@ CheckModule()
 {
 	path=$1
 	RESPONSE=$FORCE
-	if [ ${!1} -eq 1 ]
+	if [ -e $path ]
 	then
-		if [ -e $path ]
+		if [ "$FORCE" = "A" ]
 		then
-			if [ "$FORCE" = "A" ]
-			then
-				echo "$1 appears to be installed at ./$path. Backup, Delete, Exit or Skip? [b/d/e/s]"
-				read RESPONSE
-			fi
-			if [ "$RESPONSE" = "b" ]
-			then
-			  Debug 1 "Backing up $path to $path.bu"
-			  mv -f $path $path.bu
-			elif [ "$RESPONSE" = "d" ]
-			then
-			  rm -r $path
-			elif [ "$RESPONSE" = "e" ]
-			then
-			  exit 0
-			else
-			  eval "$1=0"
-			fi
+			echo "$1 appears to be installed at ./$path. Backup, Delete, Exit or Skip? [b/d/e/s]"
+			read RESPONSE
+		fi
+		if [ "$RESPONSE" = "b" ]
+		then
+		  Debug 1 "Backing up $path to $path.bu"
+		  mv -f $path $path.bu
+		elif [ "$RESPONSE" = "d" ]
+		then
+		  rm -r $path
+		elif [ "$RESPONSE" = "e" ]
+		then
+		  exit 0
+		else
+		  eval "$1=0"
 		fi
 	fi
 }
