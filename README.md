@@ -39,7 +39,7 @@ By default all modules are installed and user is prompted for action if an exist
 ./install.sh -b -i XTENSA -i SDK
 ```
 
-# Current version of Sming: [3.5.1](https://github.com/SmingHub/Sming/releases/tag/3.5.1)
+# Current version of Sming: [3.5.2](https://github.com/SmingHub/Sming/releases/tag/3.5.2)
 
 | Platform         | Notes        |  Status                                           |
 |------------------|--------------|---------------------------------------------------|
