@@ -314,7 +314,7 @@ fi
 # Download the platform agnostic packages
 if [ $SMING -eq 1 ] && ( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/Sming.zip ] )
 then
-	Debug 1 "Downloading Sming $SMING-VERSION..."
+	Debug 1 "Downloading Sming $SMING_VERSION..."
 	$WGET -O $TEMP/Sming.zip https://dl.bintray.com/sming-bw/Sming-Installer/Sming-$SMING_VERSION.zip
 	if [ $? -ne 0 ]
 	then
