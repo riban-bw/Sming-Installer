@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# This script installs Sming V3.5.1 on Posix systems including GNU/Linux, OS X, Cygwin
+# This script installs Sming V3.5.2 on Posix systems including GNU/Linux, OS X, Cygwin
 #
 # Author: Brian Walton (brian@riban.co.uk)
 #
@@ -66,7 +66,7 @@ ALL=1
 VERBOSE=0
 SILENT=0
 DOWNLOAD=1
-SMING_VERSION=3.5.1
+SMING_VERSION=3.5.2
 FAILED=0
 
 # Parse command line
