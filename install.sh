@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# This script installs Sming V3.7.0 on Posix systems including GNU/Linux, OS X, Cygwin
+# This script installs Sming V3.7.0.1 on Posix systems including GNU/Linux, OS X, Cygwin
 #
 # Author: Brian Walton (brian@riban.co.uk)
 #
@@ -29,7 +29,7 @@ Debug()
 # param Module relative installation path (folder or file)
 CheckModule()
 {
-	path=$1
+	path=$2
 	RESPONSE=$FORCE
 	if [ -e $path ]
 	then
@@ -57,7 +57,6 @@ CheckModule()
 # Initialise variables
 FORCE=A
 SMING=0
-SDK=0
 ESPTOOL=0
 ESPTOOL2=0
 XTENSA=0
@@ -66,7 +65,7 @@ ALL=1
 VERBOSE=0
 SILENT=0
 DOWNLOAD=1
-SMING_VERSION=3.7.0
+SMING_VERSION=3.7.0.1
 FAILED=0
 
 # Parse command line
@@ -86,7 +85,6 @@ while getopts ":hVSdbsni:" opt; do
 	  echo "    -i <module>    Install <module>"
 	  echo "      Modules:"
 	  echo "        sming      SMING framework"
-	  echo "        sdk        ESP8266 SDK"
 	  echo "        esptool    esptool.py"
 	  echo "        esptool2   esptool2 firmware manipulation tool"
 	  echo "        xtensa     XTENSA c/c++ compiler"
@@ -119,11 +117,7 @@ while getopts ":hVSdbsni:" opt; do
 		  sming )
 		    SMING=1
 			ALL=0
-		    ;;
-		  sdk )
-		    SDK=1
-			ALL=0
-            ;;
+	    ;;
           esptool )
 		    ESPTOOL=1
 			ALL=0
@@ -160,32 +154,29 @@ done
 if [ $ALL -eq 1 ]
 then
   SMING=1
-  SDK=1
   ESPTOOL=1
   ESPTOOL2=1
   XTENSA=1
   SPIFFY=1
 fi
 
-if [ $SMING -eq 1 ]; then CheckModule Sming/Sming;fi
-if [ $SDK -eq 1 ]; then CheckModule Sming/esp-toolkit/sdk;fi
-if [ $ESPTOOL -eq 1 ]; then CheckModule Sming/esp-toolkit/esptool;fi
-if [ $ESPTOOL2 -eq 1 ]; then CheckModule Sming/tools/esptool2;fi
-if [ $XTENSA -eq 1 ]; then CheckModule Sming/esp-toolkit/xtensa-lx106-elf;fi
-if [ $SPIFFY -eq 1 ]; then CheckModule Sming/tools/spiffy;fi
+if [ $SMING -eq 1 ]; then CheckModule SMING Sming/Sming;fi
+if [ $ESPTOOL -eq 1 ]; then CheckModule ESPTOOL Sming/esp-toolkit/esptool;fi
+if [ $ESPTOOL2 -eq 1 ]; then CheckModule ESPTOOL2 Sming/tools/esptool2;fi
+if [ $XTENSA -eq 1 ]; then CheckModule XTENSA Sming/esp-toolkit/xtensa-lx106-elf;fi
+if [ $SPIFFY -eq 1 ]; then CheckModule SPIFFY Sming/tools/spiffy;fi
 
 Debug 2 "SMING:    $SMING"
-Debug 2 "SDK:      $SDK"
 Debug 2 "ESPTOOL:  $ESPTOOL"
 Debug 2 "ESPTOOL2: $ESPTOOL2"
 Debug 2 "XTENSA:   $XTENSA"
 Debug 2 "SPIFFY:   $SPIFFY"
 
-INSTALL=$(($SMING + $SDK + $ESPTOOL + $ESPTOOL2 + $XTENSA + $SPIFFY))
+INSTALL=$(($SMING + $ESPTOOL + $ESPTOOL2 + $XTENSA + $SPIFFY))
 if [ $INSTALL -eq 0 ]
 then
   Debug 1 "Nothing selected to install"
-  exit 0
+#  exit 0
 fi
 
 # Check required tools are installed
@@ -322,17 +313,6 @@ then
 		FAILED=1
 	fi
 fi
-if [ $SDK -eq 1 ] &&( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/SDK.zip ] )
-then
-	Debug 1 "Downloading SDK..."
-	$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK_V2.0.0_16_08_10.zip
-	#$WGET -O $TEMP/SDK.zip https://dl.bintray.com/sming-bw/Sming-Installer/ESP8266_NONOS_SDK-2.1.0.zip
-	if [ $? -ne 0 ]
-	then
-		echo "Failed to download SDK package"
-		FAILED=1
-	fi
-fi
 if [ $ESPTOOL -eq 1 ] &&( [ $DOWNLOAD -eq 1 ] || [ ! -s $TEMP/esptool.zip ] )
 then
 	Debug 1 "Downloading esptool..."
@@ -361,10 +341,6 @@ if [ $XTENSA -eq 1 ]
 then
   $UNZIP -d Sming/esp-toolkit $TEMP/xtensa-lx106-elf.zip && Debug 1 "xtensa-lx106-elf toolchain installed"
 fi
-if [ $SDK -eq 1 ]
-then
-  $UNZIP -d Sming/esp-toolkit $TEMP/SDK.zip && Debug 1 "SDK installed"
-fi
 if [ $ESPTOOL -eq 1 ]
 then
   $UNZIP -d Sming/esp-toolkit $TEMP/esptool.zip && Debug 1 "esptool.py installed"
@@ -383,6 +359,7 @@ fi
 # Set environmental variables
 echo "export ESP_HOME=$(pwd)/Sming/esp-toolkit" > Sming/setenv
 echo "export SMING_HOME=$(pwd)/Sming/Sming" >> Sming/setenv
+echo "export SDK_BASE=$SMING_HOME/third-party/ESP8266_NONOS_SDK" >> Sming/setenv
 chmod 755 Sming/setenv
 
 . Sming/setenv
