@@ -359,7 +359,7 @@ fi
 # Set environmental variables
 echo "export ESP_HOME=$(pwd)/Sming/esp-toolkit" > Sming/setenv
 echo "export SMING_HOME=$(pwd)/Sming/Sming" >> Sming/setenv
-echo "export SDK_BASE=$SMING_HOME/third-party/ESP8266_NONOS_SDK" >> Sming/setenv
+echo "export SDK_BASE=$(pwd)/Sming/Sming/third-party/ESP8266_NONOS_SDK" >> Sming/setenv
 chmod 755 Sming/setenv
 
 . Sming/setenv
