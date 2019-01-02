@@ -13,7 +13,7 @@ chmod u+x install.sh
 rm install.sh
 ```
 
-A file called _setenv_ is created which may be sourced to set SMING_HOME and ESP_HOME:
+A file called _setenv_ is created which may be sourced to set SMING_HOME, ESP_HOME and SDK_BASE:
 
 ```
 . ~/Sming/setenv
@@ -36,10 +36,10 @@ Individual modules may be (re)installed using the -i switch, e.g.
 By default all modules are installed and user is prompted for action if an existing module is detected as being installed. This behaviour can be overriden, e.g. to install the SDK and the compiler and backup any exisiting installions:
 
 ```
-./install.sh -b -i XTENSA -i SDK
+./install.sh -b -i xtensa -i spiffy
 ```
 
-# Current version of Sming: [3.7.0](https://github.com/SmingHub/Sming/releases/tag/3.7.0)
+# Current version of Sming: [3.7.0.1](https://github.com/SmingHub/Sming/releases/tag/3.7.0.1)
 
 | Platform         | Notes        |  Status                                           |
 |------------------|--------------|---------------------------------------------------|
