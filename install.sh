@@ -373,6 +373,9 @@ then
   Debug 1 "[ERROR] Tests have failed. Please report an issue to https://github.com/riban-bw/Sming-Installer/issues with the following information:"
   Debug 1 "==========================================="
   Debug 1 "UNAME: `uname -a`"
+  Debug 1 "SMING_HOME: $SMING_HOME"
+  Debug 1 "ESP_HOME: $ESP_HOME"
+  Debug 1 "SDK_BASE: $SDK_BASE"
   cat $TEMP/test_results.txt
   Debug 1 "==========================================="
   exit 1
