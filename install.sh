@@ -332,7 +332,7 @@ then
 fi
 
 # Install the packages
-Debug 1 "Installing Sming to $(pwd)/Sming..."
+Debug 1 "Installing modules to $(pwd)/Sming..."
 if [ $SMING -eq 1 ]
 then
   $UNZIP $TEMP/Sming.zip && Debug 1 "Sming installed"
