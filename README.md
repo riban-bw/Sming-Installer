@@ -39,7 +39,7 @@ By default all modules are installed and user is prompted for action if an exist
 ./install.sh -b -i xtensa -i spiffy
 ```
 
-# Current version of Sming: [3.7.0.1](https://github.com/SmingHub/Sming/releases/tag/3.7.0.1)
+# Current version of Sming: [3.8.0](https://github.com/SmingHub/Sming/releases/tag/3.8.0)
 
 | Platform         | Notes        |  Status                                           |
 |------------------|--------------|---------------------------------------------------|
